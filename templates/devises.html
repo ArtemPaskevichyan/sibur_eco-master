@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<title>SIBUR ecomap</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css" rel="stylesheet">
+	<link rel="stylesheet" href="/static/style.css" type="text/css">
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+	<script src="/static/script.js"></script>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		sensorsArray0 = '{{ sensorsArray[0] }}';
+		sensorsArray1 = '{{ sensorsArray[1] }}';
+		sensorsArray2 = '{{ sensorsArray[2] }}';
+		sensorsArray3 = '{{ sensorsArray[3] }}';
+		sensorsArray4 = '{{ sensorsArray[4] }}';
+		sensorsArray5 = '{{ sensorsArray[5] }}';
+		sensorsArray6 = '{{ sensorsArray[6] }}'; 
+	</script>
+
+    <div class="header">
+	 	<div class="headerInfo">
+	 		<div class="headerTitle">SIBUR</div>
+	 		<div class="headerLogo">
+	 			<img src="static/imgs/icon.png" height="30" width="30">
+	 		</div>
+	 	</div>
+	 	<div class="headerButtons">
+	 		<input type="submit" name="navButton" value="Устройства" class="headerButton">
+	 		<input type="submit" name="navButton" value="Данные" class="headerButton">
+	 	</div>
+	 	<div class="headerBlock"></div>
+    </div>
+    <div class="headerUnderline"></div>
+
+    <div id='map'></div>
+</body>
+</html>

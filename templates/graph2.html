@@ -1,0 +1,86 @@
+<!-- Styles -->
+<style>
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
+
+</style>
+
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<!-- <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script> -->
+
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+//am4core.useTheme(am4themes_animated);
+// Themes end
+
+let chart = am4core.create("chartdiv", am4charts.XYChart);
+
+var data = [];
+var value = 50;
+for(var i = 0; i < 300; i++){
+  var date = new Date();
+  date.setHours(0,0,0,0);
+  date.setDate(i);
+  value -= Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
+  data.push({date:date, value: value});
+}
+
+console.log(data);
+
+chart.data = data;
+
+// Create axes
+var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+dateAxis.fontSize = 15
+dateAxis.fontFamily = '-apple-system, BlinkMacSystemFont, sans-serif';
+dateAxis.renderer.minGridDistance = 60;
+
+var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis.fontSize = 15
+valueAxis.fontFamily = '-apple-system, BlinkMacSystemFont, sans-serif';      // Шрифт и размер шрифта
+
+// Create series
+var series = chart.series.push(new am4charts.LineSeries());
+series.dataFields.valueY = "value";
+series.dataFields.dateX = "date";
+series.tooltipText = "{value}"
+
+series.tooltip.pointerOrientation = "vertical";
+
+series.stroke = am4core.color("#185C18");
+series.strokeWidth = 2;
+
+chart.cursor = new am4charts.XYCursor();
+chart.cursor.snapToSeries = series;
+chart.cursor.xAxis = dateAxis;
+
+//chart.scrollbarY = new am4core.Scrollbar();
+chart.scrollbarX = new am4core.Scrollbar();
+
+function createTrendLine(data) {
+  let trend = chart.series.push(new am4charts.LineSeries());
+  trend.dataFields.valueY = "value";
+  trend.dataFields.dateX = "date";
+  trend.strokeWidth = 2;
+  trend.strokeDasharray = 5;
+  trend.stroke = am4core.color("#707070");
+  trend.data = data;
+};
+
+createTrendLine([
+  { "date": "2021-06-30", "value": 100 },
+  { "date": "2022-04-25", "value": 100 }
+]);
+
+}); // end am4core.ready()
+</script>
+
+<!-- HTML -->
+<div id="chartdiv"></div>
